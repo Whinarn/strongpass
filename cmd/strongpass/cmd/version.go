@@ -40,9 +40,9 @@ var versionCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		program := "Strong Password Generator"
 
-		programVersion := "v" + version.Version
+		programVersion := version.Version
 		if version.GitCommit != "" {
-			programVersion += "-" + strings.ToUpper(version.GitCommit)
+			programVersion += "-" + strings.ToLower(version.GitCommit)
 		}
 
 		osArch := runtime.GOOS + "/" + runtime.GOARCH
