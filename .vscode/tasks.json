@@ -8,6 +8,12 @@
             "problemMatcher": [
                 "$go"
             ]
+        },
+        {
+            "label": "Test all packages",
+            "type": "shell",
+            "group": "test",
+            "command": "go test ./..."
         }
     ]
 }
