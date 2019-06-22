@@ -30,7 +30,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/whinarn/strongpass/pkg/version"
+	"github.com/whinarn/strongpass/internal/version"
 )
 
 var versionCmd = &cobra.Command{
