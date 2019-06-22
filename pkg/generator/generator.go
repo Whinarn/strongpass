@@ -80,6 +80,10 @@ func New(config *Config) (*Generator, error) {
 	}
 
 	charSet := config.prepareCharSet()
+	if len(charSet) == 0 {
+		return nil, errors.New("There are no characters available for passwords, verify the configuration")
+	}
+
 	return &Generator{
 		charSet:             charSet,
 		minLength:           config.MinLength,
@@ -154,6 +158,8 @@ func (gen *Generator) appendRandomChars(buffer []rune, length int, chars []rune)
 func (config *Config) validate() error {
 	if config.MinLength <= 0 {
 		return errors.New("The minumum length of a password cannot be zero or negative")
+	} else if config.MaxLength < config.MinLength {
+		return errors.New("The maximum length of a password cannot be lower than the minimum length")
 	}
 
 	if config.MinLowerCaseLetters < 0 {
@@ -179,10 +185,7 @@ func (config *Config) validate() error {
 	requiredMinimum := config.MinLowerCaseLetters + config.MinUpperCaseLetters +
 		config.MinDigits + config.MinSpecials
 	if config.MinLength < requiredMinimum {
-		config.MinLength = requiredMinimum
-	}
-	if config.MaxLength < config.MinLength {
-		config.MaxLength = config.MinLength
+		return errors.New("The minimum length of passwords is lower than the required minimum with the configuration")
 	}
 
 	return nil
