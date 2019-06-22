@@ -1,0 +1,13 @@
+{
+    "tasks": [
+        {
+            "label": "Install CLI",
+            "type": "shell",
+            "group": "build",
+            "command": "go install ./cmd/strongpass",
+            "problemMatcher": [
+                "$go"
+            ]
+        }
+    ]
+}
